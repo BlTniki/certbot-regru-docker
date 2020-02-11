@@ -51,3 +51,9 @@ See also `certbot --help certbot-regru:dns` for further information.
    ```
    sudo pip uninstall certbot-regru
    ```
+
+Docker container
+
+    ```bash
+    docker run --rm -e DNS_USERNAME="[REG.ru username]" -e DNS_PASSWORD="[REG.ru user password]" -e REG_RU_DOMAINS="[dns name or dns wild-card, space separated list]" -v /etc/letsencrypt:/etc/letsencrypt -v /var/log/letsencrypt/:/var/log/letsencrypt/ mfominov/regru-certbot
+    ```
