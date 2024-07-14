@@ -1,3 +1,39 @@
+# certbot-regru-docker
+Certbot together with the Reg ru dns plugin, placed in a docker container,
+to simplify the issuance and updating of certificates in the background
+
+## Launch for dummies
+docker-compose.yml
+```yml
+services:
+  certbot:
+    image: bitniki/certbot-regru-docker:1.0
+    restart: unless-stopped
+    environment:
+      - EMAIL=email@example.ru
+      - DNS_USERNAME=username
+      - DNS_PASSWORD=password
+      - REG_RU_DOMAINS=example.ru *.example.ru
+      - REG_RU_PROPAGATION_SECONDS=360
+    volumes:
+    - cert:/etc/letsencrypt
+    - log:/var/log/letsencrypt
+
+volumes:
+  cert:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /path/to/where/you/wanna/stole/yours/certificates
+  log:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /path/to//where/you/wanna/stole/yours/logs
+```
+
 # certbot-regru
 Reg.ru DNS authenticator plugin for Certbot
 
